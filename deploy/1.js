@@ -30,11 +30,11 @@ module.exports = async ({ deployments, getChainId }) => {
     case '1':
       multisigAddress = '';
       chainlinkV2UsdEthPriceFeed = '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419';
-      protocolProjectStartsAtOrAfter = 1664047173;
+      protocolProjectStartsAtOrAfter = 1;
       break;
     // Goerli
     case '5':
-      multisigAddress = '0xF6520124AF97acF8F4B8431095b515Eb28B6D658';
+      multisigAddress = '0xeAE92017166672B46443333A9f499a2b7eB5091e';
       chainlinkV2UsdEthPriceFeed = '0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e';
       protocolProjectStartsAtOrAfter = 0;
       break;
@@ -220,21 +220,21 @@ module.exports = async ({ deployments, getChainId }) => {
   // Deploy a JB1DayReconfigurationBufferBallot.
   await deploy('JB1DayReconfigurationBufferBallot', {
     ...baseDeployArgs,
-    contract: "contracts/JBReconfigurationBufferBallot.sol:JBReconfigurationBufferBallot",
+    contract: 'contracts/JBReconfigurationBufferBallot.sol:JBReconfigurationBufferBallot',
     args: [86400],
   });
 
   // Deploy a JB3DayReconfigurationBufferBallot.
   const JB3DayReconfigurationBufferBallot = await deploy('JB3DayReconfigurationBufferBallot', {
     ...baseDeployArgs,
-    contract: "contracts/JBReconfigurationBufferBallot.sol:JBReconfigurationBufferBallot",
+    contract: 'contracts/JBReconfigurationBufferBallot.sol:JBReconfigurationBufferBallot',
     args: [259200],
   });
 
   // Deploy a JB7DayReconfigurationBufferBallot.
   await deploy('JB7DayReconfigurationBufferBallot', {
     ...baseDeployArgs,
-    contract: "contracts/JBReconfigurationBufferBallot.sol:JBReconfigurationBufferBallot",
+    contract: 'contracts/JBReconfigurationBufferBallot.sol:JBReconfigurationBufferBallot',
     args: [604800],
   });
 
@@ -273,7 +273,6 @@ module.exports = async ({ deployments, getChainId }) => {
       splits: splits,
     };
 
-
     console.log('Deploying protocol project...');
 
     await jbControllerContract.connect(deployer).launchProjectFor(
@@ -281,23 +280,23 @@ module.exports = async ({ deployments, getChainId }) => {
 
       /* projectMetadata */
       [
-        /*content*/ 'QmQHGuXv7nDh1rxj48HnzFtwvVxwF1KU9AfB6HbfG8fmJF',
+        /*content*/ 'QmfDC74mK7HgDXSgPK2sP2qnf6RmNnbQuuyoqiHRqiQDLt',
         /*domain*/ ethers.BigNumber.from(0),
       ],
 
       /*fundingCycleData*/
       [
-        /*duration*/ ethers.BigNumber.from(1209600),
-        /*weight*/ ethers.BigNumber.from('62850518250000000000000'),
-        /*discountRate*/ ethers.BigNumber.from(5000000),
-        /*ballot*/ JB3DayReconfigurationBufferBallot.address,
+        /*duration*/ ethers.BigNumber.from(0),
+        /*weight*/ ethers.BigNumber.from('1000000000000000000000000'),
+        /*discountRate*/ ethers.BigNumber.from(0),
+        /*ballot*/ ethers.constants.AddressZero,
       ],
 
       /*fundingCycleMetadata*/
       [
         /*global*/
         [/*allowSetTerminals*/ false, /*allowSetController*/ true, /*pauseTransfer*/ true],
-        /*reservedRate*/ ethers.BigNumber.from(5000),
+        /*reservedRate*/ ethers.BigNumber.from(0),
         /*redemptionRate*/ ethers.BigNumber.from(0),
         /*ballotRedemptionRate*/ ethers.BigNumber.from(0),
         /*pausePay*/ false,
@@ -318,11 +317,11 @@ module.exports = async ({ deployments, getChainId }) => {
 
       /*mustStartAtOrAfter*/ ethers.BigNumber.from(protocolProjectStartsAtOrAfter),
 
-      /*groupedSplits*/[groupedSplits],
+      /*groupedSplits*/ [],
 
-      /*fundAccessConstraints*/[],
+      /*fundAccessConstraints*/ [],
 
-      /*terminals*/[JBETHPaymentTerminal.address],
+      /*terminals*/ [JBETHPaymentTerminal.address],
 
       /*memo*/ '',
     );
