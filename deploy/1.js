@@ -28,7 +28,7 @@ module.exports = async ({ deployments, getChainId }) => {
   switch (chainId) {
     // mainnet
     case '1':
-      multisigAddress = '';
+      multisigAddress = '0x42cC558fE66b03c5e950d5b0384DAe958dC58649';
       chainlinkV2UsdEthPriceFeed = '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419';
       protocolProjectStartsAtOrAfter = 1;
       break;
@@ -280,7 +280,7 @@ module.exports = async ({ deployments, getChainId }) => {
 
       /* projectMetadata */
       [
-        /*content*/ 'QmfDC74mK7HgDXSgPK2sP2qnf6RmNnbQuuyoqiHRqiQDLt',
+        /*content*/ 'QmXDV4wNQXtexY5DoHhRL7fAWoTjbMy5coJEuY7ajASX6a',
         /*domain*/ ethers.BigNumber.from(0),
       ],
 
